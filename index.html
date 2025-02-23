@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./src/output.css" rel="stylesheet">
+</head>
+<body>
+  <div class="main flex justify-center py-30 bg-red-300 min-h-screen">
+    <div class="p-5 bg-white shadow-lg rounded-lg w-80">
+      <h1 class="title py-5 text-2xl font-semibold text-center">To Do List</h1>
+      
+      <!-- Input + Add Button -->
+      <div class="flex w-full border border-gray-300 rounded-md overflow-hidden">
+        <input type="text" class="h-10 w-full px-3 focus:outline-none" id="task" placeholder="Add a task...">
+        <button class="bg-blue-500 text-white px-4 py-2 hover:bg-blue-600" onclick="addTask()">
+          Add
+        </button>
+      </div>
+
+      <!-- Task List -->
+      <ul id="taskList" class="mt-4 space-y-2"></ul>
+
+    </div>
+  </div>
+
+  <script>
+    function addTask() {
+      let taskEntered = document.getElementById("task").value.trim();
+
+      if (taskEntered === "") return; // Prevent adding empty tasks
+
+      let taskList = document.getElementById("taskList");
+
+
+      let taskItem = document.createElement("li");
+      taskItem.className = "flex justify-between items-center bg-gray-100 p-2 rounded-md shadow";
+
+    
+      let taskText = document.createElement("span");
+      taskText.innerText = taskEntered;
+      taskText.className = "text-gray-800";
+
+    
+      let removeBtn = document.createElement("button");
+      removeBtn.innerText = "Remove";
+      removeBtn.className = "bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600";
+      removeBtn.onclick = function () {
+        taskList.removeChild(taskItem);
+      };
+
+      // Append elements
+      taskItem.appendChild(taskText);
+      taskItem.appendChild(removeBtn);
+      taskList.appendChild(taskItem);
+
+      // Clear input field
+      document.getElementById("task").value = "";
+    }
+  </script>
+</body>
+</html>
